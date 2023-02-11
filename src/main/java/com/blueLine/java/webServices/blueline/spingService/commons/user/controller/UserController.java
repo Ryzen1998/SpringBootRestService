@@ -36,7 +36,7 @@ public class UserController {
             response = _userService.addUser(data);
         }
         if(response!=null)
-            return new ResponseEntity<String>(response, HttpStatus.CREATED);
+            return new ResponseEntity<String>(response, HttpStatus.OK);
         else
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
     }
