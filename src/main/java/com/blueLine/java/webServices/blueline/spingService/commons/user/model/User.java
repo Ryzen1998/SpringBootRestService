@@ -1,5 +1,6 @@
 package com.blueLine.java.webServices.blueline.spingService.commons.user.model;
 
+import com.blueLine.java.webServices.blueline.spingService.commons.user.dto.UserDto;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -48,6 +49,13 @@ public class User{
     private String phoneNumber;
     @Nullable
     private boolean isActive =false;
+
+    public User(String email, String name, String phoneNumber,Long id) {
+        this.email = email;
+        this.name=name;
+        this.phoneNumber=phoneNumber;
+        this.id = id;
+    }
 
 
     @Override

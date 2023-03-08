@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class CastUserObj {
 
-    public List<UserDto> userObjectConversion(List<User> users){
+    public List<UserDto> userListToUserDTOList(List<User> users){
         if(users!=null){
              List<UserDto> userList = new ArrayList<>();
              users.stream().forEach(x->
@@ -28,8 +28,11 @@ public class CastUserObj {
         }
       return null;
     }
-    public List<User> userObjectConversion(UserDto user){
-
+    public User UserDtoToUser(UserDto userDto){
+        if(userDto!=null){
+            User result = new User(userDto.getEmail(), userDto.getName(),userDto.getPhoneNumber(),userDto.getId());
+            return  result;
+        }
         return null;
     }
 }

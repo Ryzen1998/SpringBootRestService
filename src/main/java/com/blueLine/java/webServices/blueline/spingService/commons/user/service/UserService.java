@@ -24,7 +24,7 @@ public class UserService implements iUserService{
     @Override
     public List<UserDto> getAllUsers() {
         List<User> userList = userRepository.getAllUsers();
-        return castUserObj.userObjectConversion(userList);
+        return castUserObj.userListToUserDTOList(userList);
     }
 
     @Override
@@ -42,5 +42,15 @@ public class UserService implements iUserService{
             }
         }
         return "oops! Something went wrong";
+    }
+
+    @Override
+    public UserDto updateUser(UserDto data) {
+        if(data!=null && userRepository.findUserBy(FilterUserBy.user_name,data.getUserName())!=null && userRepository.getUserById(data.getId())!=null)
+        {
+            User response = userRepository.updateUser(castUserObj.UserDtoToUser(data));
+            System.out.println(response);
+        }
+        return null;
     }
 }

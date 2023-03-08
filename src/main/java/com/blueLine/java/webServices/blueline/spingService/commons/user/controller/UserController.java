@@ -4,7 +4,6 @@ import com.blueLine.java.webServices.blueline.spingService.commons.user.dto.Sign
 import com.blueLine.java.webServices.blueline.spingService.commons.user.dto.UserDto;
 import com.blueLine.java.webServices.blueline.spingService.commons.user.service.iUserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,10 @@ public class UserController {
     @GetMapping("getusers")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<UserDto> response = _userService.getAllUsers();
-        if(!response.isEmpty())
-            return new ResponseEntity<List<UserDto>>(response, HttpStatus.OK);
+        if(response!=null)
+            return new ResponseEntity<>(response, HttpStatus.OK);
         else
-            return new ResponseEntity<List<UserDto>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("createuser")
@@ -36,8 +35,13 @@ public class UserController {
             response = _userService.addUser(data);
         }
         if(response!=null)
-            return new ResponseEntity<String>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         else
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    @PutMapping("updateuser")
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto data){
+        UserDto response = _userService.updateUser(data);
+        return null;
     }
 }

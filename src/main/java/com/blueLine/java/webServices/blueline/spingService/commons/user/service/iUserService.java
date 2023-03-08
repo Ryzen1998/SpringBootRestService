@@ -9,4 +9,5 @@ public interface iUserService {
 
      List<UserDto> getAllUsers();
      String addUser(SignupDto data);
+     UserDto updateUser(UserDto data);
 }

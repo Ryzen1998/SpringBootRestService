@@ -5,7 +5,6 @@ import com.blueLine.java.webServices.blueline.spingService.commons.user.enums.Fi
 import com.blueLine.java.webServices.blueline.spingService.commons.user.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +32,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom
 
     @Override
     public void addNewUser(SignupDto data) {
-            int query;
+
         try {
-            query = entityManager.createNativeQuery("insert into user_data ( email, is_active, name, password, " +
+                     entityManager.createNativeQuery("insert into user_data ( email, is_active, name, password, " +
                     "phone_number, role, user_name)\n" +
                     "values (?1,?2,?3,?4,?5,?6,?7)").setParameter(1,data.getEmail())
                     .setParameter(2,false).setParameter(3,data.getName())
@@ -49,7 +48,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom
 
     @Override
     public User findUserBy(FilterUserBy filter, String searchParameter) {
-        User result = new User();
+        User result;
         try {
             result =(User)entityManager.createNativeQuery(String.format(
                     "select * from user_data where upper(%s)=?1",filter.toString())
@@ -58,6 +57,40 @@ public class UserRepositoryImpl implements UserRepositoryCustom
                              getSingleResult();
 
         }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        User result;
+        try{
+            result =(User)entityManager.createNativeQuery("select * from user_data where id=?1",User.class).
+                     setParameter(1,id).
+                     getSingleResult();
+
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        User result;
+        try {
+                   entityManager.createNativeQuery("update user_data set email=?1, name=?2, phone_number=?3 where id=?4",User.class).
+                    setParameter(1,user.getEmail()).
+                    setParameter(2,user.getName()).
+                    setParameter(3,user.getPhoneNumber()).
+                    setParameter(4,user.getId()).executeUpdate();
+
+                    result = getUserById(user.getId());
+
+        }catch (Exception ex){
             System.out.println(ex.getMessage());
             return null;
         }
