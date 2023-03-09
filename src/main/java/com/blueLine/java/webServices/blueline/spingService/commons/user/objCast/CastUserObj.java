@@ -21,7 +21,8 @@ public class CastUserObj {
                                      x.getEmail(),
                                      x.getUserName(),
                                      x.getPhoneNumber(),
-                                     x.isActive()
+                                     x.isActive(),
+                                     Integer.toString(x.getRole())
                              )
                      ));
              return userList;

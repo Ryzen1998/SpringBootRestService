@@ -1,6 +1,5 @@
 package com.blueLine.java.webServices.blueline.spingService.commons.user.dto;
 
-import com.blueLine.java.webServices.blueline.spingService.commons.user.model.User;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 
@@ -108,9 +107,5 @@ public class UserDto {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public  UserDto getInstance(){
-        return this;
     }
 }
