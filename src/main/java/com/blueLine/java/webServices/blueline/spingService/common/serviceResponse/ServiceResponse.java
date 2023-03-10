@@ -1,16 +1,16 @@
-package com.blueLine.java.webServices.blueline.spingService.commons.serviceResponse;
+package com.blueLine.java.webServices.blueline.spingService.common.serviceResponse;
 
 public class ServiceResponse <T>{
     private T resultData=null;
     private boolean success=true;
     private String message;
-    private int resultCode=200;
+    private int responseCode =200;
 
-    public ServiceResponse(T resultData, boolean success, String message, int resultCode) {
+    public ServiceResponse(T resultData, boolean success, String message, int responseCode) {
         this.resultData = resultData;
         this.success = success;
         this.message = message;
-        this.resultCode = resultCode;
+        this.responseCode = responseCode;
     }
 
     public ServiceResponse(T resultData, String message) {
@@ -43,11 +43,11 @@ public class ServiceResponse <T>{
     }
 
     public int getResultCode() {
-        return resultCode;
+        return responseCode;
     }
 
     public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
+        this.responseCode = resultCode;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ServiceResponse <T>{
                 "resultData=" + resultData +
                 ", success=" + success +
                 ", message='" + message + '\'' +
-                ", resultCode=" + resultCode +
+                ", responseCode=" + responseCode +
                 '}';
     }
 }

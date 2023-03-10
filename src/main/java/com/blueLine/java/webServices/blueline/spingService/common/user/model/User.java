@@ -1,6 +1,5 @@
-package com.blueLine.java.webServices.blueline.spingService.commons.user.model;
+package com.blueLine.java.webServices.blueline.spingService.common.user.model;
 
-import com.blueLine.java.webServices.blueline.spingService.commons.user.dto.UserDto;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

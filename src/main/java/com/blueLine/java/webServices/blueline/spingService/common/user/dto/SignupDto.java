@@ -1,6 +1,5 @@
-package com.blueLine.java.webServices.blueline.spingService.commons.user.dto;
+package com.blueLine.java.webServices.blueline.spingService.common.user.dto;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 
 public class SignupDto {

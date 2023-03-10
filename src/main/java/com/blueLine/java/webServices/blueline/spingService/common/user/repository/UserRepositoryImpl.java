@@ -1,8 +1,8 @@
-package com.blueLine.java.webServices.blueline.spingService.commons.user.repository;
+package com.blueLine.java.webServices.blueline.spingService.common.user.repository;
 
-import com.blueLine.java.webServices.blueline.spingService.commons.user.dto.SignupDto;
-import com.blueLine.java.webServices.blueline.spingService.commons.user.enums.FilterUserBy;
-import com.blueLine.java.webServices.blueline.spingService.commons.user.model.User;
+import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
+import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
