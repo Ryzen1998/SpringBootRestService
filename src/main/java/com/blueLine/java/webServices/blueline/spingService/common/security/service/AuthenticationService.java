@@ -43,7 +43,7 @@ public class AuthenticationService {
                          user.getResultData().getUserName()));
              }
          }catch(Exception ex){
-             return new ServiceResponse<>(null,false,"Invalid Credentials",404);
+             return new ServiceResponse<>(null,false,"Invalid Username or Password",404);
          }
         return new ServiceResponse<>(null,false,"Invalid Credentials",404);
     }
@@ -61,6 +61,9 @@ public class AuthenticationService {
             if (result.isSuccess()) {
                 String jwtToken = jwtService.generateToken(castUserObj.signupDtoToUser(dto));
                 return new ServiceResponse<>(jwtToken, "Success");
+            }
+            else {
+                return new ServiceResponse<>(null,false, result.getMessage(), 400);
             }
         }
         return new ServiceResponse<>(null,false,"Unable to Register User",500);

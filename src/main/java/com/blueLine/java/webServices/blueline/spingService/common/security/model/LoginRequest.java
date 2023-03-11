@@ -1,6 +1,9 @@
 package com.blueLine.java.webServices.blueline.spingService.common.security.model;
 
+import jakarta.validation.constraints.Email;
+
 public class LoginRequest {
+    @Email
     private String email;
     private String password;
 

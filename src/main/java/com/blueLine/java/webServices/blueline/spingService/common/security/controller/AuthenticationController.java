@@ -4,6 +4,7 @@ import com.blueLine.java.webServices.blueline.spingService.common.security.model
 import com.blueLine.java.webServices.blueline.spingService.common.security.service.AuthenticationService;
 import com.blueLine.java.webServices.blueline.spingService.common.serviceResponse.ServiceResponse;
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,12 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
     @PostMapping("register")
-    public ServiceResponse<String> register(@RequestBody SignupDto request){
+    public ServiceResponse<String> register(@RequestBody @Valid SignupDto request){
         ServiceResponse<String> response = authenticationService.register(request);
         return response;
     }
     @PostMapping("login")
-    public ServiceResponse<String> login(@RequestBody LoginRequest request){
+    public ServiceResponse<String> login(@RequestBody @Valid LoginRequest request){
         ServiceResponse<String> response = authenticationService.authenticate(request);
         return response;
     }
