@@ -1,6 +1,8 @@
 package com.blueLine.java.webServices.blueline.spingService.common.user.objCast;
 
+import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.UserDto;
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +24,14 @@ public class CastUserObj {
                                      x.getUserName(),
                                      x.getPhoneNumber(),
                                      x.isActive(),
-                                     Integer.toString(x.getRole())
+                                     x.getRole()
                              )
                      ));
              return userList;
         }
       return null;
     }
-    public User UserDtoToUser(UserDto userDto){
+    public User userDtoToUser(UserDto userDto){
         if(userDto!=null){
             User result = new User(userDto.getEmail(), userDto.getName(),userDto.getPhoneNumber(),userDto.getId());
             return  result;
@@ -46,9 +48,24 @@ public class CastUserObj {
                     user.getUserName(),
                     user.getPhoneNumber(),
                     user.isActive(),
-                    Integer.toString(user.getRole())
+                    user.getRole()
             );
             return dto;
+        }
+        return null;
+    }
+    public User signupDtoToUser(SignupDto dto){
+        if(dto!=null){
+            User user = new User(
+                    dto.getName(),
+                    dto.getEmail(),
+                    dto.getUserName(),
+                    dto.getPassword(),
+                    Role.USER,
+                    dto.getPhoneNumber(),
+                     true
+            );
+            return user;
         }
         return null;
     }

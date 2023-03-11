@@ -42,21 +42,11 @@ public class ServiceResponse <T>{
         this.message = message;
     }
 
-    public int getResultCode() {
+    public int getResponseCode() {
         return responseCode;
     }
 
-    public void setResultCode(int resultCode) {
-        this.responseCode = resultCode;
-    }
-
-    @Override
-    public String toString() {
-        return "ServiceResponse{" +
-                "resultData=" + resultData +
-                ", success=" + success +
-                ", message='" + message + '\'' +
-                ", responseCode=" + responseCode +
-                '}';
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
     }
 }

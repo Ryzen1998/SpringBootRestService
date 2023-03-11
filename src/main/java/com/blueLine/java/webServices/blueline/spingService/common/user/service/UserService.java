@@ -57,10 +57,35 @@ public class UserService implements iUserService{
             } else if(userRepository.findUserBy(FilterUserBy.phone_number,data.getPhoneNumber())!=null) {
                 return new ServiceResponse<>(null, false, "Phone Number Already Exists", 406);
             }else {
-                User response = userRepository.updateUser(castUserObj.UserDtoToUser(data));
+                User response = userRepository.updateUser(castUserObj.userDtoToUser(data));
                  return new ServiceResponse<>(castUserObj.userToUserDto(response),"Success");
             }
         }
         return new ServiceResponse<>(null,false,"oops! No Matching Data Found",404);
+    }
+
+    @Override
+    public ServiceResponse<Boolean> removeUser(Long id) {
+        if(userRepository.getUserById(id)!=null){
+            boolean response = userRepository.removeUserById(id);
+            if (response){
+                return new ServiceResponse<>(true,"User Removed");
+            }
+            else {
+                return new ServiceResponse<>(false,false,"Something Went Wrong",500);
+            }
+        }
+        return new ServiceResponse<>(false,false,"User Not Found",404);
+    }
+
+    @Override
+    public ServiceResponse<User> findUserBy(FilterUserBy filterUserBy, String searchParameter) {
+        if(searchParameter!=null){
+            User result = userRepository.findUserBy(filterUserBy,searchParameter);
+            if(result!=null){
+                return  new ServiceResponse<>(result,"Success");
+            }
+        }
+        return new ServiceResponse<>(null,false,"User Not Found",404);
     }
 }

@@ -34,4 +34,10 @@ public class UserController {
         ServiceResponse<UserDto> response = _userService.updateUser(data);
         return response;
     }
+    @DeleteMapping("removeuser/{id}")
+    public ServiceResponse<Boolean> removeUser(@Valid @PathVariable Long id){
+        ServiceResponse<Boolean> response = _userService.removeUser(id);
+        return response;
+    }
+
 }

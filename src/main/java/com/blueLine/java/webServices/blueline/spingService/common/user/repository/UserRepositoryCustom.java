@@ -14,4 +14,5 @@ public interface UserRepositoryCustom {
     User findUserBy(FilterUserBy filter,String searchParameter);
     User getUserById(Long id);
     User updateUser(User user);
+    boolean removeUserById(Long id);
 }

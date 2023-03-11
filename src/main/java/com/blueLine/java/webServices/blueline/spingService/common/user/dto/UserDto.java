@@ -1,5 +1,6 @@
 package com.blueLine.java.webServices.blueline.spingService.common.user.dto;
 
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,12 +17,12 @@ public class UserDto {
     private String phoneNumber;
     private boolean isActive =false;
     @Nullable
-    private String role;
+    private Role role;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String name, String email, String userName, String phoneNumber, boolean isActive, String role) {
+    public UserDto(Long id, String name, String email, String userName, String phoneNumber, boolean isActive, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -101,11 +102,11 @@ public class UserDto {
         isActive = active;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

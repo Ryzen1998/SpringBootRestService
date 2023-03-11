@@ -37,9 +37,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom
                      entityManager.createNativeQuery("insert into user_data ( email, is_active, name, password, " +
                     "phone_number, role, user_name)\n" +
                     "values (?1,?2,?3,?4,?5,?6,?7)").setParameter(1,data.getEmail())
-                    .setParameter(2,false).setParameter(3,data.getName())
+                    .setParameter(2,true).setParameter(3,data.getName())
                     .setParameter(4,data.getPassword()).setParameter(5,data.getPhoneNumber())
-                    .setParameter(6,1).setParameter(7,data.getUserName()).executeUpdate();
+                    .setParameter(6,"USER").setParameter(7,data.getUserName()).executeUpdate();
 
         }catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom
         User result;
         try {
             result =(User)entityManager.createNativeQuery(String.format(
-                    "select * from user_data where upper(%s)=?1",filter.toString())
+                    "select * from user_data where upper(%s)=?1",filter.toString().toUpperCase())
                             ,User.class)
                     .setParameter(1,searchParameter.toUpperCase()).
                              getSingleResult();
@@ -95,5 +95,17 @@ public class UserRepositoryImpl implements UserRepositoryCustom
             return null;
         }
         return result;
+    }
+
+    @Override
+    public boolean removeUserById(Long id) {
+        try {
+            entityManager.createNativeQuery("delete from user_data where id=?1").setParameter(1,id).executeUpdate();
+
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+        return true;
     }
 }
