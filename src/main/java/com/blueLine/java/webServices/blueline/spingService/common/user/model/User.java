@@ -1,6 +1,7 @@
 package com.blueLine.java.webServices.blueline.spingService.common.user.model;
 
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +22,6 @@ import java.util.List;
 )
 public class User implements UserDetails {
     public User(){
-
     }
     public User(String email, String name, String phoneNumber,Long id) {
         this.email = email;
@@ -70,7 +69,17 @@ public class User implements UserDetails {
     private String phoneNumber;
     @Nullable
     private boolean isActive =false;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserExt userExtended;
 
+    public UserExt getUserExtended() {
+        return userExtended;
+    }
+
+    public void setUserExtended(UserExt userExtended) {
+        this.userExtended = userExtended;
+    }
 
     @Override
     public String toString() {

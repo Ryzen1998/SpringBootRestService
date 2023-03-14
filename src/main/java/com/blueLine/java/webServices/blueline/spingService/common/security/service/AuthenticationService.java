@@ -6,7 +6,7 @@ import com.blueLine.java.webServices.blueline.spingService.common.user.dto.Signu
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import com.blueLine.java.webServices.blueline.spingService.common.user.objCast.CastUserObj;
-import com.blueLine.java.webServices.blueline.spingService.common.user.service.UserService;
+import com.blueLine.java.webServices.blueline.spingService.common.user.service.userService.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

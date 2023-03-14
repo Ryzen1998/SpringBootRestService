@@ -1,7 +1,8 @@
-package com.blueLine.java.webServices.blueline.spingService.common.user.repository;
+package com.blueLine.java.webServices.blueline.spingService.common.user.repository.userRepo;
 
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ public interface UserRepositoryCustom {
     User getUserById(Long id);
     User updateUser(User user);
     boolean removeUserById(Long id);
+    Role getUserRoleByEmail(String email);
 }

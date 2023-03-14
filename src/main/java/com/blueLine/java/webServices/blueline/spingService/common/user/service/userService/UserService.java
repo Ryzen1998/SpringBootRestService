@@ -1,25 +1,29 @@
-package com.blueLine.java.webServices.blueline.spingService.common.user.service;
+package com.blueLine.java.webServices.blueline.spingService.common.user.service.userService;
 
 import com.blueLine.java.webServices.blueline.spingService.common.serviceResponse.ServiceResponse;
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.UserDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import com.blueLine.java.webServices.blueline.spingService.common.user.objCast.CastUserObj;
-import com.blueLine.java.webServices.blueline.spingService.common.user.repository.UserRepository;
+import com.blueLine.java.webServices.blueline.spingService.common.user.repository.userRepo.UserRepository;
+import com.blueLine.java.webServices.blueline.spingService.common.user.service.userExtService.UserExtService;
 import com.blueLine.java.webServices.blueline.spingService.common.user.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService implements iUserService{
+public class UserService implements iUserService {
     private final UserRepository userRepository;
     private final CastUserObj castUserObj;
+    private final UserExtService userExtService;
     @Autowired
-    public UserService(UserRepository userRepository, CastUserObj castUserObj) {
+    public UserService(UserRepository userRepository, CastUserObj castUserObj, UserExtService userExtService) {
         this.userRepository = userRepository;
         this.castUserObj = castUserObj;
+        this.userExtService = userExtService;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class UserService implements iUserService{
                 return new ServiceResponse<>(null,false,"Phone Number Already Exists",406);
             }else {
                 userRepository.addNewUser(data);
+                userExtService.doNewUserAddedJob(userRepository.findUserBy(FilterUserBy.email,data.getEmail()).getId(),"Ashwin");
                 return new ServiceResponse<>(null,true,String.format("Welcome %s",data.getUserName()),201);
             }
         }
@@ -85,6 +90,16 @@ public class UserService implements iUserService{
             if(result!=null){
                 return  new ServiceResponse<>(result,"Success");
             }
+        }
+        return new ServiceResponse<>(null,false,"User Not Found",404);
+    }
+
+    @Override
+    public ServiceResponse<Role> findUserRoleByEmail(String email) {
+        if(email!=null){
+            Role result = userRepository.getUserRoleByEmail(email);
+            if(result!=null)
+                 return new ServiceResponse<>(result,"Success");
         }
         return new ServiceResponse<>(null,false,"User Not Found",404);
     }

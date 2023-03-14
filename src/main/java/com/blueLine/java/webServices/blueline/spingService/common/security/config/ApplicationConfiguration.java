@@ -1,7 +1,7 @@
 package com.blueLine.java.webServices.blueline.spingService.common.security.config;
 
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
-import com.blueLine.java.webServices.blueline.spingService.common.user.repository.UserRepository;
+import com.blueLine.java.webServices.blueline.spingService.common.user.repository.userRepo.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

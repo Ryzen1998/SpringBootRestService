@@ -1,5 +1,6 @@
 package com.blueLine.java.webServices.blueline.spingService.common.security.filter;
 
+import com.blueLine.java.webServices.blueline.spingService.common.security.blueLineAuthenticationContext.blueLineAuthContext;
 import com.blueLine.java.webServices.blueline.spingService.common.security.service.JwtService;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
@@ -51,6 +52,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                blueLineAuthContext.AuthContext.setEmail(userEmail);
+                blueLineAuthContext.AuthContext.setRole(userDetails.getAuthorities());
             }
         }
         filterChain.doFilter(request,response);

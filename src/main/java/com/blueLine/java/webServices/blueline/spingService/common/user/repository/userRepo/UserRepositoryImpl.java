@@ -1,13 +1,13 @@
-package com.blueLine.java.webServices.blueline.spingService.common.user.repository;
+package com.blueLine.java.webServices.blueline.spingService.common.user.repository.userRepo;
 
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
+import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom
         List<User> resultList = new ArrayList<>();
         try {
             resultList = entityManager.createNativeQuery("select * from user_data",User.class).getResultList();
-
+            
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
@@ -107,5 +107,17 @@ public class UserRepositoryImpl implements UserRepositoryCustom
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Role getUserRoleByEmail(String email) {
+        Role role = null;
+       try{
+         role =  (Role)entityManager.createNativeQuery("select role from user_data where email=?1",Role.class).setParameter(1,email).getSingleResult();
+       }catch(Exception ex){
+           System.out.println(ex.getMessage());
+           return null;
+       }
+       return role;
     }
 }
