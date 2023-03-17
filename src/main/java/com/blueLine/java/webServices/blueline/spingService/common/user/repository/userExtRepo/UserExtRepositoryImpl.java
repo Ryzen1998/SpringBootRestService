@@ -14,7 +14,7 @@ public class UserExtRepositoryImpl implements UserExtRepositoryCustom {
     EntityManager entityManager;
     @Override
     public void newUserAddedJob(Long id,String addedBy) {
-        addedBy = addedBy==null?"SYSTEM":addedBy;
+        addedBy = addedBy.equals(null)?"SYSTEM":addedBy;
         try{
             entityManager.
                     createNativeQuery("insert into user_extended (user_id, created_by, created_date, last_login_date) values (?1,?2,?3,?4);").
