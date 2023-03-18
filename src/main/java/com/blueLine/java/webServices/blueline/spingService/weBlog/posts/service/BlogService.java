@@ -34,7 +34,7 @@ public class BlogService implements iBlogService{
               blogRepository.addPost(blogInstance);
             return new ServiceResponse<>(null,"Success");
         }
-        return new ServiceResponse<>(null,"Your Post Contains Banned Content");
+        return new ServiceResponse<>(null,"Invalid Request, Post has been Declined");
     }
 
     @Override
