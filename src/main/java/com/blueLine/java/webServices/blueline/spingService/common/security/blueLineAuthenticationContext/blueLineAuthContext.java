@@ -1,6 +1,5 @@
 package com.blueLine.java.webServices.blueline.spingService.common.security.blueLineAuthenticationContext;
 
-import com.blueLine.java.webServices.blueline.spingService.common.serviceResponse.ServiceResponse;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
@@ -9,6 +8,8 @@ public class blueLineAuthContext {
     public static class AuthContext{
         private static String email;
         private static Collection<? extends GrantedAuthority> role;
+        private static Boolean active;
+
         public static boolean userRoleIs(Role role){
             if(role!=null) {
                 return role.toString().equals(getRole());
@@ -32,6 +33,14 @@ public class blueLineAuthContext {
         }
         public static void setRole(Collection<? extends GrantedAuthority> role) {
             AuthContext.role = role;
+        }
+
+        public static Boolean getActive() {
+            return active;
+        }
+
+        public static void setActive(Boolean active) {
+            AuthContext.active = active;
         }
     }
 }

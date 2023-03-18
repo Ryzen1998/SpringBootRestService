@@ -17,4 +17,5 @@ public interface iUserService {
     ServiceResponse<Boolean> removeUser(Long id);
     ServiceResponse<User> findUserBy(FilterUserBy filterUserBy, String searchParameter);
     ServiceResponse<Role> findUserRoleByEmail(String email);
+    ServiceResponse<User> findUserById(Long id);
 }

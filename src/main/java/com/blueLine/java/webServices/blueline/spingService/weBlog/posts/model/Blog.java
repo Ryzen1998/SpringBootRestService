@@ -1,7 +1,5 @@
 package com.blueLine.java.webServices.blueline.spingService.weBlog.posts.model;
 
-import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
-import com.blueLine.java.webServices.blueline.spingService.weBlog.genre.model.Genre;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -9,7 +7,7 @@ import java.util.Date;
 @Entity
 @Table(name = "blogPosts")
 public class Blog {
-    public Blog(Long id, String title, String content, Date createdOn, User createdByUser, boolean isActive, Genre genre) {
+    public Blog(Long id, String title, String content, Date createdOn, Long createdByUser, boolean isActive, int genre) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -30,14 +28,10 @@ public class Blog {
     @Column(length = 1500)
     private String content;
     private Date createdOn;
-    @OneToOne
-    @MapsId
-    private User createdByUser;
-    private boolean isActive;
-    @OneToOne
-    @MapsId
-    private Genre genre;
 
+    private Long createdByUser;
+    private boolean isActive;
+    private int genre;
     public Long getId() {
         return id;
     }
@@ -69,28 +63,26 @@ public class Blog {
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
-
-    public User getCreatedByUser() {
-        return createdByUser;
-    }
-
-    public void setCreatedByUser(User createdByUser) {
-        this.createdByUser = createdByUser;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
     public boolean isActive() {
         return isActive;
     }
-
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public Long getCreatedByUser() {
+        return createdByUser;
+    }
+
+    public void setCreatedByUser(Long createdByUser) {
+        this.createdByUser = createdByUser;
+    }
+
+    public int getGenre() {
+        return genre;
+    }
+
+    public void setGenre(int genre) {
+        this.genre = genre;
     }
 }

@@ -54,6 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 blueLineAuthContext.AuthContext.setEmail(userEmail);
                 blueLineAuthContext.AuthContext.setRole(userDetails.getAuthorities());
+                blueLineAuthContext.AuthContext.setActive(userDetails.isEnabled());
             }
         }
         filterChain.doFilter(request,response);

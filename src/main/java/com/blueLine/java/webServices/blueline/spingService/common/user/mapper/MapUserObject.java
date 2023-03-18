@@ -1,4 +1,4 @@
-package com.blueLine.java.webServices.blueline.spingService.common.user.objCast;
+package com.blueLine.java.webServices.blueline.spingService.common.user.mapper;
 
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.UserDto;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CastUserObj {
+public class MapUserObject {
 
     public List<UserDto> userListToUserDTOList(List<User> users){
         if(users!=null){

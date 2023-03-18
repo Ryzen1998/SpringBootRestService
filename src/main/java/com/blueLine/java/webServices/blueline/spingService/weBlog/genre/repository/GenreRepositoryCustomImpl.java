@@ -3,10 +3,8 @@ package com.blueLine.java.webServices.blueline.spingService.weBlog.genre.reposit
 import com.blueLine.java.webServices.blueline.spingService.weBlog.genre.model.Genre;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.data.util.Optionals;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

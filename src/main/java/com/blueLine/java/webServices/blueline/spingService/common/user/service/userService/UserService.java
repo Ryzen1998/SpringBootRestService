@@ -6,7 +6,7 @@ import com.blueLine.java.webServices.blueline.spingService.common.user.dto.UserD
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.Role;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
-import com.blueLine.java.webServices.blueline.spingService.common.user.objCast.CastUserObj;
+import com.blueLine.java.webServices.blueline.spingService.common.user.mapper.MapUserObject;
 import com.blueLine.java.webServices.blueline.spingService.common.user.repository.userRepo.UserRepository;
 import com.blueLine.java.webServices.blueline.spingService.common.user.service.userExtService.UserExtService;
 import com.blueLine.java.webServices.blueline.spingService.common.user.validation.Validator;
@@ -17,12 +17,12 @@ import java.util.List;
 @Service
 public class UserService implements iUserService {
     private final UserRepository userRepository;
-    private final CastUserObj castUserObj;
+    private final MapUserObject mapUserObject;
     private final UserExtService userExtService;
     @Autowired
-    public UserService(UserRepository userRepository, CastUserObj castUserObj, UserExtService userExtService) {
+    public UserService(UserRepository userRepository, MapUserObject mapUserObject, UserExtService userExtService) {
         this.userRepository = userRepository;
-        this.castUserObj = castUserObj;
+        this.mapUserObject = mapUserObject;
         this.userExtService = userExtService;
     }
 
@@ -30,7 +30,7 @@ public class UserService implements iUserService {
     public ServiceResponse<List<UserDto>> getAllUsers() {
         List<User> userList = userRepository.getAllUsers();
         if(userList!=null){
-            return new ServiceResponse<>(castUserObj.userListToUserDTOList(userList),"Success");
+            return new ServiceResponse<>(mapUserObject.userListToUserDTOList(userList),"Success");
         }
         return new ServiceResponse<>(null,false,"No Data Found",404);
     }
@@ -62,8 +62,8 @@ public class UserService implements iUserService {
             } else if(userRepository.findUserBy(FilterUserBy.phone_number,data.getPhoneNumber())!=null) {
                 return new ServiceResponse<>(null, false, "Phone Number Already Exists", 406);
             }else {
-                User response = userRepository.updateUser(castUserObj.userDtoToUser(data));
-                 return new ServiceResponse<>(castUserObj.userToUserDto(response),"Success");
+                User response = userRepository.updateUser(mapUserObject.userDtoToUser(data));
+                 return new ServiceResponse<>(mapUserObject.userToUserDto(response),"Success");
             }
         }
         return new ServiceResponse<>(null,false,"oops! No Matching Data Found",404);
@@ -91,6 +91,16 @@ public class UserService implements iUserService {
                 return  new ServiceResponse<>(result,"Success");
             }
         }
+        return new ServiceResponse<>(null,false,"User Not Found",404);
+    }
+
+    @Override
+    public ServiceResponse<User> findUserById(Long id) {
+            User result = userRepository.getUserById(id);
+            if(result!=null){
+                return  new ServiceResponse<>(result,"Success");
+            }
+
         return new ServiceResponse<>(null,false,"User Not Found",404);
     }
 

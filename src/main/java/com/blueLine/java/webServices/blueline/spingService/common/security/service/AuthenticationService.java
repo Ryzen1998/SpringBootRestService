@@ -5,7 +5,7 @@ import com.blueLine.java.webServices.blueline.spingService.common.serviceRespons
 import com.blueLine.java.webServices.blueline.spingService.common.user.dto.SignupDto;
 import com.blueLine.java.webServices.blueline.spingService.common.user.enums.FilterUserBy;
 import com.blueLine.java.webServices.blueline.spingService.common.user.model.User;
-import com.blueLine.java.webServices.blueline.spingService.common.user.objCast.CastUserObj;
+import com.blueLine.java.webServices.blueline.spingService.common.user.mapper.MapUserObject;
 import com.blueLine.java.webServices.blueline.spingService.common.user.service.userService.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +17,14 @@ public class AuthenticationService {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final CastUserObj castUserObj;
+    private final MapUserObject mapUserObject;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, JwtService jwtService, CastUserObj castUserObj, AuthenticationManager authenticationManager) {
+    public AuthenticationService(UserService userService, PasswordEncoder passwordEncoder, JwtService jwtService, MapUserObject mapUserObject, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.castUserObj = castUserObj;
+        this.mapUserObject = mapUserObject;
         this.authenticationManager = authenticationManager;
     }
 
@@ -59,7 +59,7 @@ public class AuthenticationService {
             );
             ServiceResponse<String> result = userService.addUser(dto);
             if (result.isSuccess()) {
-                String jwtToken = jwtService.generateToken(castUserObj.signupDtoToUser(dto));
+                String jwtToken = jwtService.generateToken(mapUserObject.signupDtoToUser(dto));
                 return new ServiceResponse<>(jwtToken, "Success");
             }
             else {
